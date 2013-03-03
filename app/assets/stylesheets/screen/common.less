@@ -1,0 +1,102 @@
+form {
+	&.medium-width {
+		.control-label{
+			width: 130px;
+		}	
+		.controls{
+			margin-left: 150px;
+		}
+	}
+	&.mini-width {
+		.control-label{
+			width: 50px;
+		}	
+		.controls{
+			margin-left: 80px;
+		}
+	}
+}
+i {
+	&.icon-trash {
+		cursor: pointer;
+	}
+	&.icon-remove {
+		cursor: pointer;
+	}
+	&.icon-time {
+		cursor: pointer;
+	}
+	&.hightlight{
+		color: orange;
+	}
+}
+
+.label-important i.icon-remove{
+	color : black;
+}
+
+// Element à afficher seulement pour la mise en page Impression
+@media screen {
+	.onlyForPrint {
+		display: none;
+	}	
+}
+
+.icon-mandatory:before { 
+	content: "*"; 
+	color: red;
+}
+
+.popover {
+	z-index: 1050;
+	width: 300px;
+	li.specialDay{
+		line-height: 5px;
+	}
+}
+
+td, th{
+	&.amountCells {
+		text-align: right;
+	}
+}
+
+// Affiche un label pour l'input "select" à droite
+.selectRightLabel {
+	display: initial;
+}
+
+//Datatable
+.validatedRows {
+	@from: red;
+	@to: white;
+	background-color: @from; // Only for IE !
+	background: -webkit-linear-gradient(top left, @from, @to);
+	background: -moz-linear-gradient(top left, @from, @to);
+	background: linear-gradient(top left, @from, @to);
+}
+
+p {
+	&.large-width {
+		width: 75%;
+	}
+}
+
+.modal-backdropColorMixin {
+	background: white;
+	opacity: 0.5;
+}
+.modal-backdrop {
+	.modal-backdropColorMixin;
+	&.fade.in {
+		.modal-backdropColorMixin;
+	}
+}
+
+hr {
+	border-top-color: #E3E3E3;
+}
+
+.brand:hover {
+	color: #333;
+}

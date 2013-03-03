@@ -1,0 +1,124 @@
+<div class="row-fluid">
+	<div class="span3">
+		<h4><a data-ng-href="#/customers"><i class="icon-arrow-left"></i></a>&nbsp;{{customer.name | capitalize}}</h4>
+
+		<form class="well" id="edit-customer-form" ng-submit="save()">
+			<div class="control-group">
+				<label class="control-label">Code <i class="icon-mandatory"></i>
+
+					<div class="controls">
+						<input type="text" class="span12" required placeholder="code" data-ng-model="customer.code">
+					</div>
+				</label>
+			</div>
+			<div class="control-group">
+				<label class="control-label">Name <i class="icon-mandatory"></i>
+
+					<div class="controls">
+						<input type="text" class="span12" required placeholder="name" data-ng-model="customer.name">
+					</div>
+				</label>
+			</div>
+			<div class="control-group">
+				<label class="control-label">Final customer
+
+					<div class="controls">
+						<input type="text" class="span12" placeholder="final Customer" data-ng-model="customer.finalCustomer">
+					</div>
+				</label>
+			</div>
+			<div class="form-actions">
+				<input type="submit" class="btn btn-primary span9" value="Save">
+			</div>
+		</form>
+	</div>
+	<div class="span9">
+		<div class="row-fluid">
+			<div class="span4">
+				<span>{{filteredMissions.length}}</span>
+				<span data-ng-pluralize data-count="totalMissions" data-when="{'0': 'No Mission',
+																               'one': ' / 1 Mission',
+																               'other': ' / {} Missions'}">
+				</span>
+			</div>
+			<div class="span4">
+				<input type="text" data-ng-model="missionFilter.filter">
+			</div>
+		</div>
+		<div class="row-fluid">
+			<div class="span12" style="height:350px; overflow-y:scroll; overflow-x:hidden;">
+				<div class="row-fluid" data-ng-repeat="mission in filteredMissions" style="background-color: whiteSmoke; border: 1px solid #E3E3E3; border-radius: 4px;">
+					<div class="span4"><a data-ng-href="#/mission/{{mission.id}}"><strong>{{mission.code | uppercase}}</strong></a></div>
+					<div class="span4"><strong>{{mission.label | uppercase}}</strong></div>
+					<div class="span3">
+						<span data-ng-show="mission.startDate">{{mission.startDate}}</span>
+						<span data-ng-show="mission.endDate"><i class="icon-arrow-right"></i> {{mission.endDate}}</span>
+					</div>
+					<div class="span1">
+						<button class="btn btn-danger btn-small" data-ng-click="removeMission(mission.id)"><i class="icon-trash"></i></button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row-fluid">
+	<div class="span12">
+		<form class="well well-small" id="new-mission-form" ng-submit="addMission()">
+			<fieldset>
+				<legend>Mission</legend>
+				<div class="row-fluid">
+					<div class="span2">
+						<span>Code <i class="icon-mandatory"></i></span>
+					</div>
+					<div class="span4">
+						<input type="text" class="span5" data-ng-model="mission.code" required placeholder="code">
+					</div>
+					<div class="span1">
+						<span>Label <i class="icon-mandatory"></i></span>
+					</div>
+					<div class="span5">
+						<input type="text" class="span10" data-ng-model="mission.label" required placeholder="label">
+					</div>
+				</div>
+				<div class="row-fluid">
+					<div class="span2">
+						<span>Begin</span>
+					</div>
+					<div class="span4">
+						<input type="date" data-pattern="dd/MM/yyyy" class="span5" data-ng-model="mission.startDate">
+					</div>
+					<div class="span1">
+						<span>End </span>
+					</div>
+					<div class="span4">
+						<input type="date" data-pattern="dd/MM/yyyy" class="span5" data-ng-model="mission.endDate">
+					</div>
+				</div>
+				<div class="row-fluid">
+					<div class="span2">
+						<span>Allowance type <i class="icon-mandatory"></i></span>
+					</div>
+					<div class="span4">
+						<select data-ng-model="mission.allowanceType" required>
+							<option value="">-- choose --</option>
+							<option value="NONE">NONE</option>
+							<option value="ZONE">ZONE</option>
+							<option value="REAL">REAL</option>
+							<option value="CASINO">CASINO</option>
+						</select>
+					</div>
+					<div class="span1">
+						<span>Distance</span>
+					</div>
+					<div class="span4 input-append">
+						<input type="text" class="span2" data-ng-model="mission.distance" placeholder="1.5"><span class="add-on"><i class="icon-road"></i></span>
+					</div>
+				</div>
+				<div class="form-actions">
+					<input type="submit" class="btn btn-primary span3" value="Save">
+				</div>
+			</fieldset>
+		</form>
+	</div>
+</div>

@@ -1,0 +1,52 @@
+@(userConnected: models.User=null, empty: java.lang.Boolean = false, activeMenu: constants.Menus = null)
+
+@import constants._
+@import be.objectify.deadbolt.views.html._
+@import be.objectify.deadbolt.utils.TemplateUtils._
+@import security._
+@import tags.htmlElement._
+@import tags.functions._
+
+<div class="navbar navbar-fixed-top noPrint">
+	<div class="navbar-inner">
+		<div class="container">
+			<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="brand" href="@routes.Application.index">Genesis</a>
+			@if(!empty){
+				<div class="nav-collapse collapse">
+					<ul class="nav">
+						<li class="@if(Menus.CRA.equals(activeMenu)){active}">
+							<a href="@routes.Cras.show">@Menus.CRA.label</a>
+						</li>
+	                    <li class="@if(Menus.HOLIDAYS.equals(activeMenu)){active}">
+	                        <a href="@routes.Holidays.show">@Menus.HOLIDAYS.label</a>
+	                    </li>
+	                    <li class="@if(Menus.FEES.equals(activeMenu)){active}">
+	                        <a href="@routes.Fees.show">@Menus.FEES.label</a>
+	                    </li>
+						@restrict(la(as(RoleName.GESTION), as(RoleName.ADMINISTRATOR))) {
+						<li class="@if(Menus.PAY.equals(activeMenu)){active}">
+							<a href="@routes.Pays.show">@Menus.PAY.label</a>
+						</li>
+						}
+	                    @restrict(la(as(RoleName.ADMINISTRATOR))) {
+	                    <ul class="nav">
+	                        <li><a href="@routes.Backoffice.show">Backoffice</a></li>
+	                    </ul>
+	                    }
+					</ul>
+					<ul class="nav pull-right">
+						<li>
+		                    <a href="@routes.Accounts.showAccount" title="Mon compte"><i class="icon-user"></i><span class="visible-phone">&nbsp;</span></a>
+	                    </li>
+						<li><a href="@routes.Application.logout" title="Se déconnecter"><i class="icon-signout"></i><span class="visible-phone">&nbsp;</span></a></li>
+					</ul>
+				</div>
+			}
+		</div>
+	</div>
+</div>

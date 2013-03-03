@@ -1,0 +1,12 @@
+@(id: String, label: String, placeHolder: String = "", isPeriod: Boolean = false, secondId: String = "", secondLabel: String = "", isRequired: Boolean = false)
+
+<div class="control-group">
+	<label class="control-label" for="@id">@label @if(isRequired){<i class="icon-mandatory"></i>}</label>
+	<div class="controls">
+		<input type="text" class="input-small datepicker" id="@id" name="@id" placeholder="@placeHolder" @if(isRequired){required}>
+        @if(isPeriod){
+            @secondLabel<input type="text" class="input-small datepicker" id="@secondId" name="@secondId" placeholder="@placeHolder" @if(isRequired){required}>
+        }
+        <span class="label label-info hide" id="infoNbDay"></span>
+	</div>
+</div>

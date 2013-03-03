@@ -1,0 +1,68 @@
+@(employees: java.util.List[models.Employee], holidayTypes: java.util.List[models.Mission], connectedUser: models.User=null)
+
+@import constants._
+@import helper._
+@import models._
+@import tags.htmlElement._
+@import tags.functions._
+@import tags.holidays._
+@import be.objectify.deadbolt.views.html._
+@import be.objectify.deadbolt.utils.TemplateUtils._
+@import security._
+
+@scripts={
+    <script type="text/javascript">
+        'use strict';
+        $(function() {
+            @* Affichage du formulaire *@
+            var forms = $('#forms');
+            $(window).trigger('ShowCreate:renderHoliday', forms);
+        });
+    </script>
+    
+}
+
+@main(connectedUser, scripts, Menus.HOLIDAYS){
+    <div class="row" id="holidays">
+        <div class="span5" id="enteringHolidays">
+            <ul class="nav nav-tabs" id="tabAbsences">
+                <li class="pull active" id="tabHeaderNormal">
+                    <a id='tabNormal' href="#tabPaneJour" data-toggle="tab">Absence jour</a>
+                </li>
+                <li class="pull" id="tabHeaderPeriod">
+                    <a id='tabPeriod' href="#tabPanePeriod" data-toggle="tab">Absence période</a>
+                </li>
+                <li class="pull" id="tabHeaderRecurrent">
+                    <a id='tabRecurrent' href="#tabPaneRecurrent" data-toggle="tab">Absence récurrente</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane in active" id="tabPaneJour">
+                    @_htmlFormAbsenceJour(employees, holidayTypes, connectedUser)
+                </div>
+                <div class="tab-pane in" id="tabPanePeriod">
+                    @_htmlFormAbsencePeriod(employees, holidayTypes, connectedUser)
+                </div>
+                <div class="tab-pane in" id="tabPaneRecurrent">
+                    @_htmlFormAbsenceRecurrent(employees, holidayTypes, connectedUser)
+                </div>
+            </div>
+        </div>
+        <div class="span7">
+            <table class="table table-striped table-bordered table-condensed" id="tableAbsences" >
+                <thead>
+                    <tr>
+                        <th>Motif</th>
+                        <th>Du</th>
+                        <th>Au</th>
+                        <th>Nb jour(s)</th>
+                        <th>Etat</th>
+                        <th><i class="icon-comment"></i></th>
+                        <th><i class="icon-trash"></i></th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+}

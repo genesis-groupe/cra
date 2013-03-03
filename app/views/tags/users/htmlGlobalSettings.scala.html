@@ -1,0 +1,67 @@
+@(managers: java.util.List[models.Employee])
+
+@import tags.functions._
+
+<div id="divGlobalSettings" class="hide">
+	<div class="row">
+		<div class="span4">
+			<form class="well form-horizontal mini-width" id="formEmail">
+			   	<legend>Modifier adresse mail</legend>
+			   	<div class="control-group">
+			        <label class="control-label" for="email">Mail</label>
+			        <div class="controls">
+			            <div class="input-prepend">
+	  						<span class="add-on"><i class="icon-envelope"></i></span>
+	                    	<input type="text" class="input-large" name="email" id="email" disabled>
+	                	</div>
+			        </div>
+			    </div>
+			    <div class="control-group">
+			        <div class="controls">
+			            <button class="btn btn-primary" id="btnEmail" type="button">Editer</button>
+                		<button class="btn hide" id="btnResetEmail" type="button">Annuler</button>
+			        </div>
+			    </div>              
+			</form>
+		</div>
+		<div class="span5">
+			<form class="well form-horizontal medium-width" id="formManager">
+				<legend>Modifier responsable</legend>
+				<div class="control-group">
+					<label class="control-label" for="manager">Responsable</label>
+					<div class="controls">
+						<select class="input-large" id="manager" name="manager" disabled>
+							@selectPlaceholder("Responsable")
+							@for(manager <- managers) {
+								<option value="@manager.trigramme">@formatUserName(manager)</option>
+							}
+	                    </select>
+			        </div>
+			    </div>
+                <div class="control-group">
+			        <div class="controls">
+			            <button class="btn btn-primary" id="btnManager" type="button">Editer</button>
+                		<button class="btn hide" id="btnResetManager" type="button">Annuler</button>
+			        </div>
+			    </div>              
+			</form>
+		</div>
+	</div>
+	<div class="row">
+		<div class="span4">
+			<form class="well form-horizontal medium-width" id="formStandBy">
+			   	<legend>Astreintes</legend>
+				<div class="control-group">
+					<label class="control-label" for="showStandBy">Activer la saisie des atreintes</label>
+					<div class="controls">
+						<input type="checkbox" name="showStandBy" id="showStandBy" disabled>
+			        </div>
+			    </div>
+                <div class="control-group">
+		            <button class="btn btn-primary" id="btnShowStandBy" type="button">Editer</button>
+            		<button class="btn hide" id="btnResetShowStandBy" type="button">Annuler</button>
+			    </div>       
+			</form>
+		</div>
+	</div>   	
+</div>

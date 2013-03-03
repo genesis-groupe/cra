@@ -1,0 +1,234 @@
+@page {
+     size: landscape A4;
+ }
+body {
+	margin : 0;
+	font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+pre {
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+.export table {
+	border-collapse: collapse;
+	border-spacing: 0px;
+}
+.export th {
+	text-align: left;
+	padding-left: 2px;
+}
+.export td {
+	padding-left: 2px;
+}
+/* Header */
+.export .header table {
+	width: 100%;
+}
+.export .header td.information {
+	width: 80%;
+	padding-left: 15px;
+}
+.export .header .invalidCra {
+	color: red;
+}
+
+/* Month */
+.export .month {
+	width: 100%;
+}
+.export .month td {
+	width: 14%;
+}
+/* Day */
+.export .day {
+	width: 100%;
+	text-align: center;
+	border: 1px solid gray;
+}
+.export .day th{
+	border-bottom: 1px solid gray;
+	text-align: center;
+}
+.export .day .specialHalfDay {
+	color: red;
+}
+
+.export .day.pastoOrFuture {
+	color: gray;
+}
+.export .day.empty,
+.export .day.empty th{
+	border: none;
+}
+/* Total */
+.export .total {
+	width: 100%;
+}
+
+.export .total th{
+	vertical-align: top;
+}
+.export .total th#total{
+	vertical-align: middle;
+}
+.export .total th, .export .total td {
+	border: 1px solid gray;
+	text-align: center;
+}
+
+/* Signature */
+.export .signature {
+	width: 100%;
+}
+.export .signature th {
+	text-decoration: underline;
+	width:33%;
+	text-align: center;
+}
+
+/* Fees */
+.export .fees table {
+	width: 100%;
+	border : 2px solid gray;
+}
+
+.export .fees .employee-vehicule {
+	width: auto;
+}
+
+.export .fees th, .export .fees td{
+	border: 1px solid gray;
+}
+.export .fees th {
+	width: 170px;
+	text-align: left
+}
+.export .fees th, .export .fees td {
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+.export .fees .fee-table tr.journey th, .export .fees .fee-table tr.total th{
+	border-top-width: 2px;
+	border-bottom-width: 2px;
+}
+
+.export .fees .fee-table tr.journey.top td  {
+	border-top-width: 2px;
+}
+.export .fees .fee-table tr.journey.bottom td {
+	border-bottom-width: 2px;
+}
+.export .fees .employee-vehicule .kilometer-rate {
+	width: 100px;
+}
+.export .comment .title {
+	margin-bottom: 0px;
+}
+.export .comment .content {
+	margin-top: 0px;
+}
+
+/* Détail des heures */
+/*
+.export .detailedTime h3 {
+	color: red;
+}
+
+.export .detailedTime th, .export .detailedTime td {
+	text-align: left;
+	padding: 2px 5px;
+}
+.export .detailedTime th{
+	padding-left: 15px;
+}
+*/
+/* Astreinte */
+/*
+.export .standBy h3 {
+	color: red;
+}
+.export .standBy {
+	margin: 5px;
+}
+.export .standBy th, .export .standBy td {
+	text-align: left;
+	padding-top: 2px;
+	padding-bottom: 2px;
+}
+.export .standBy th{
+	padding-left: 15px;
+	padding-right: 5px;
+}
+.export .standBy th.title{
+	padding-left: 5px;
+	padding-right: 5px;
+}
+*/
+
+
+/* detailedTimeDistribution */
+.export .detailedTimeDistribution table {
+	border : 2px solid gray;
+	margin-bottom: 5px;
+}
+.export .detailedTimeDistribution table.times {
+	width: 100%;
+}
+
+.export .detailedTimeDistribution th,
+.export .detailedTimeDistribution td {
+	border: 1px solid gray;
+}
+.export .detailedTimeDistribution .times th.col-number,
+.export .detailedTimeDistribution .times td.col-number {
+	border-left-width: 2px;
+}
+.export .detailedTimeDistribution .times th.col-total,
+.export .detailedTimeDistribution .times td.col-total {
+	border-right-width: 2px;
+}
+.export .detailedTimeDistribution .times tr .line-title {
+	border-right-width: 2px;	
+}
+
+.export .detailedTimeDistribution .times tfoot tr th,
+.export .detailedTimeDistribution .times tfoot tr td {
+	border-top-width: 2px;
+	border-bottom-width: 2px;
+}
+.export .detailedTimeDistribution .times thead tr.header.top th {
+	border-bottom: none;
+}
+.export .detailedTimeDistribution .times thead tr.header.bottom th {
+	border-bottom-width: 2px;
+	border-top: none;
+}
+.export .detailedTimeDistribution table.times thead tr.header.top th.line-title {
+	border : 2px solid gray;
+}
+.export .detailedTimeDistribution .standBy th {
+	border-width: 2px;
+}
+.export .detailedTimeDistribution .standBy tbody th {
+	border-top-width: 0px;
+	border-bottom-width: 0px;
+}
+.export .detailedTimeDistribution .standBy tbody th.customer {
+	border-top-width: 2px;
+}
+.export .detailedTimeDistribution .standBy thead td {
+	border-left-width: 2px;
+}
+
+.export .detailedTimeDistribution thead th {
+	text-align: center;
+}
+.export .detailedTimeDistribution .times td,
+.export .detailedTimeDistribution .times tbody th.col-total,
+.export .detailedTimeDistribution .times tfoot th.col-total,
+.export .detailedTimeDistribution .times tfoot th.col-number {
+	text-align: right;	
+}
+
+

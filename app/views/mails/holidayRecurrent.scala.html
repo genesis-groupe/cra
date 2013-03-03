@@ -1,0 +1,35 @@
+@(employee: models.Employee, mission: models.Mission, beginning: String, end: String,
+repeatEveryXWeek: java.lang.Integer, daysOfWeek: List[String], nbOfOccurences: java.lang.Integer,
+morning: Boolean, afternoon: Boolean, comment: String, nbDays: Double)
+
+@import models._
+@import constants._
+@import tags.functions._
+
+<!DOCTYPE html>
+
+<html lang="fr">
+    <body>
+        <p>
+            Bonjour,
+            <br><br>
+            Le collaborateur <strong>@formatUserName(employee)</strong> a effectué une demande de <strong>@mission.label</strong>, 
+            @if(repeatEveryXWeek == 1){ <strong>tous les semaines</strong>, le } else { <strong>tous les @repeatEveryXWeek semaines</strong>, le }
+            <strong>@for(day <- daysOfWeek){ @day } @if(morning == null ){ après-midi. } else { @if(afternoon == null){ matin. } }</strong>
+            <br>
+            A partir du <strong>@beginning</strong>
+            @if(nbOfOccurences != null){
+                , pendant les <strong>@nbOfOccurences semaines à venir.</strong>
+            } else {
+                @if(end != null){
+                    , jusqu'au <strong>@end.</strong>
+                }
+            }
+            @if(nbDays > 0){<br>Soit un nombre total de jour(s) ouvré(s) posé(s) de <strong>@nbDays</strong>.}
+            @if(comment != null){
+                <br>
+                Commentaire du collaborateur : <i>"@comment."</i>
+            }
+        </p>
+    </body>
+</html>

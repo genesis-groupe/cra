@@ -1,0 +1,63 @@
+@(user: models.User, employees: java.util.List[models.Employee], years: java.util.List[java.lang.Integer], months: java.util.List[models.Month], selectedYear: java.lang.Integer, selectedMonth: java.lang.Integer)
+
+@import constants._
+@import helper._
+@import models._
+@import tags.htmlElement._
+@import tags.functions._
+@import tags.cras._
+@import be.objectify.deadbolt.views.html._
+@import be.objectify.deadbolt.utils.TemplateUtils._
+@import security._
+
+@scripts={
+	<script type="text/javascript">
+		'use strict';
+		$(function() {
+			$('#content').on('submit', '#searchForm', function(event){
+				event.preventDefault();
+				$(window).trigger('ShowCreate:openCalendar', $(this).serializeObject());
+			});
+			@restrict(la(as(RoleName.COLLABORATOR))) {
+				@* Affichage automatique du CRA *@
+				var form = $('#searchForm').serializeObject();
+				$(window).trigger('ShowCreate:openCalendar', form);
+			}
+		});
+	</script>
+}
+
+@main(user, scripts, Menus.CRA){
+	<div class="row">
+		<div class="span12">
+			<form class="well well-small form-inline noPrint" id="searchForm">
+			<fieldset>
+				@restrict(la(as(RoleName.GESTION), as(RoleName.ADMINISTRATOR))) {
+					@selectEmployee(employees)
+				}
+				@restrict(la(as(RoleName.COLLABORATOR))) {
+					<input type="hidden" id="trigramme" name="trigramme" value="@user.trigramme"/>
+				}
+				<label>&nbsp;Année <i class="icon-mandatory"></i>
+					<select class="input-small" id="year" name="year" size="1" required="">
+						@selectPlaceholder("Année")
+						@for(year <- years) {
+							<option value="@year" @if(selectedYear == year){selected="selected"}>@year</option>
+						}
+					</select>
+				</label>
+				<label>&nbsp;Mois <i class="icon-mandatory"></i>
+					<select class="input-medium" id="month" name="month" size="1" required="">
+						@selectPlaceholder("Mois")
+						@for(month <- months) {
+							<option value="@month.value" @if(selectedMonth == month.value){selected="selected"}>@month.label</option>
+						}
+					</select>
+				</label>
+				<input type="submit" class="btn btn-primary pull-right" id="btnSearch" name="btnSearch" value="Rechercher">
+			</fieldset>
+			</form>
+		</div>
+	</div>
+	@_htmlResult()
+}

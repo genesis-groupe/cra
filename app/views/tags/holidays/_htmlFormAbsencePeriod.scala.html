@@ -1,0 +1,37 @@
+@(employees: java.util.List[models.Employee], holidays: java.util.List[models.Mission], connectedUser: models.User=null)
+
+<form class="well form-horizontal medium-width" id="formPeriod">
+    @_htmlInputEmployeeMission(employees, holidays, connectedUser)
+    <div class="control-group">
+        <label class="control-label" for="startHoliday">Absent(e) du <i class="icon-mandatory"></i></label>
+        <div class="controls">
+            <input type="text" class="input-small datepicker" id="startHoliday" name="startHoliday" required>
+            &nbsp;
+            <label class="checkbox inline">
+                <input type="checkbox" id="startMorning" name="startMorning" value="true" checked> Matin
+            </label>
+            <label class="checkbox inline">
+                <input type="checkbox" id="startAfternoon" name="startAfternoon" value="true" checked disabled> Après-midi
+            </label>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="endHoliday">Au <i class="icon-mandatory"></i></label>
+        <div class="controls">
+            <input type="text" class="input-small datepicker" id="endHoliday" name="endHoliday" required>
+            &nbsp;
+            <label class="checkbox inline">
+                <input type="checkbox" id="endMorning" name="endMorning" value="true" checked disabled> Matin
+            </label>
+            <label class="checkbox inline">
+                <input type="checkbox" id="endAfternoon" name="endAfternoon" value="true" checked> Après-midi
+            </label>
+        </div>
+    </div>
+    <div class="control-group">
+        <center>
+            <span class="label label-info hide " id="infoNbDayPeriod"></span>
+        </center>
+    </div>
+    @_htmlInputCommentAndButton()
+</form>

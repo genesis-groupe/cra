@@ -1,0 +1,29 @@
+@(employee: models.Employee, mission: models.Mission, beginning: String, end: String,
+nbDays: Double, comment: String, morning: Boolean, afternoon: Boolean)
+
+@import models._
+@import constants._
+@import tags.functions._
+
+<!DOCTYPE html>
+
+<html lang="fr">
+    <body>
+        <p>
+            Bonjour,
+            <br><br>
+            Le collaborateur <strong>@formatUserName(employee)</strong> a effectué une demande de <strong>@mission.label</strong>
+            @if(end == null){
+                pour le <strong>@beginning
+                @if(afternoon == null ){ matin } else { @if(morning == null){ après-midi } }.</strong>
+            } else {
+                du <strong>@beginning @if(morning == null){ après-midi }</strong> au <strong>@end @if(afternoon == null){ matin }.</strong>
+            }
+            @if(nbDays > 0){<br>Soit un nombre total de jour(s) ouvré(s) posé(s) de <strong>@nbDays</strong>.}
+            @if(comment != null){
+                <br>
+                Commentaire du collaborateur : <i>"@comment."</i>
+            }
+        </p>
+    </body>
+</html>

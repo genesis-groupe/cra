@@ -1,0 +1,14 @@
+@(employees: java.util.List[models.Employee])
+
+@import tags.functions._
+
+
+<label class="control-label">Employee <i class="icon-mandatory"></i>
+	<select class="input-xlarge" id="trigramme" name="trigramme" size="1" required="required">
+		@selectPlaceholder("Employé")
+		@for(employee <- employees) {
+			<option value="@employee.trigramme">@formatUserName(employee)</option>
+		}
+	</select>
+</label>
+

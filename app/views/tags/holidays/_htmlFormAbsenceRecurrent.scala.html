@@ -1,0 +1,77 @@
+@(employees: java.util.List[models.Employee], holidays: java.util.List[models.Mission], connectedUser: models.User=null)
+
+<form class="well form-horizontal medium-width" id="formRecurrent">
+    @_htmlInputEmployeeMission(employees, holidays, connectedUser)
+    <div class="control-group">
+        <label class="control-label" for="recurrence">Répéter toutes les <i class="icon-mandatory"></i></label>
+        <div class="controls">
+            <select class="input-mini" id="recurrence" name="repeatEveryXWeeks" required="">
+                @for(i <- 1 until 6) {
+                    <option value="@i">@i</option>
+                } 
+            </select>
+            <label class="selectRightLabel" id="repeatAllLabel">semaine(s)</label>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">Répéter le <i class="icon-mandatory"></i></label>
+        <div class="controls">
+            <label class="checkbox inline">
+                <input type="checkbox" class="day" id="1" name="daysOfWeek" value="1"> L
+            </label>
+            <label class="checkbox inline">
+                <input type="checkbox" class="day" id="2" name="daysOfWeek" value="2"> M
+            </label>
+            <label class="checkbox inline">
+                <input type="checkbox" class="day" id="3" name="daysOfWeek" value="3"> M
+            </label>
+            <label class="checkbox inline">
+                <input type="checkbox" class="day" id="4" name="daysOfWeek" value="4"> J
+            </label>
+            <label class="checkbox inline">
+                <input type="checkbox" class="day" id="5" name="daysOfWeek" value="5"> V
+            </label>
+        </div>
+    </div>
+    <div class="control-group">
+        <div class="controls"> 
+            <label class="checkbox inline">
+                <input type="checkbox" id="morning" name="morning" value="true" checked> Matin
+            </label>
+            <label class="checkbox inline">
+                <input type="checkbox" id="afternoon" name="afternoon" value="true" checked> Après-midi
+            </label>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="startRecurrence">Date de début <i class="icon-mandatory"></i></label>
+        <div class="controls">
+            <input type="text" class="input-small datepicker" id="startRecurrence" name="startHoliday">
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">Fin <i class="icon-mandatory"></i></label>
+        <div class="controls">
+            <label class="radio">
+                <input type="radio" name="endRecurrence" id="endRecurrence" value="after" checked>
+                Pendant
+                <select class="input-mini" id="nbOfOccurences" name="nbOfOccurences" required="">
+                @for(i <- 1 until 31) {
+                    <option value="@i">@i</option>
+                } 
+            </select>
+            <label class="selectRightLabel">semaine(s)</label>
+            </label>
+            <label class="radio">
+                <input type="radio" name="endRecurrence" id="optionsRadios1" value="at">
+                Le <input type="text" class="input-small datepicker" id="inputAt" name="endHoliday" disabled/> 
+            </label>
+        </div>
+    </div>
+    <div class="control-group">
+        <center>
+            <p class="large-width label label-info hide " id="infoNbDay"></p>
+        </center>
+    </div>
+    @_htmlInputCommentAndButton()
+</form>

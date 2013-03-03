@@ -1,0 +1,34 @@
+@(employees: java.util.List[models.Employee], holidays: java.util.List[models.Mission], connectedUser: models.User=null)
+
+@import tags.functions._
+@import be.objectify.deadbolt.views.html._
+@import be.objectify.deadbolt.utils.TemplateUtils._
+@import security._
+
+@restrict(la(as(RoleName.GESTION), as(RoleName.ADMINISTRATOR))) {
+    <div class="control-group">
+        <label class="control-label" for="trigramme">Employee <i class="icon-mandatory"></i></label>
+        <div class="controls">
+            <select class="input-xlarge" id="trigramme" name="trigramme" size="1" required="required">
+                @selectPlaceholder("Employé")
+                @for(employee <- employees) {
+                <option value="@employee.trigramme">@formatUserName(employee)</option>
+                }
+            </select>
+        </div>
+    </div>
+}
+@restrict(la(as(RoleName.COLLABORATOR))) {
+    <input type="hidden" id="trigramme" name="trigramme" value="@connectedUser.trigramme"/>
+}
+<div class="control-group">
+    <label class="control-label" for="holidayMissionId">Motif <i class="icon-mandatory"></i></label>
+    <div class="controls">
+        <select class="input-medium" id="holidayMissionId" name="holidayMissionId" required="">
+            @selectPlaceholder("Motif")
+            @for(holiday <- holidays) {
+            <option value="@holiday.id">@holiday.label</option>
+            }
+        </select>
+    </div>
+</div>

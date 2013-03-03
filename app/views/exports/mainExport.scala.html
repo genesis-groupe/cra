@@ -1,0 +1,19 @@
+@(exportTitle: java.lang.String, cra: models.Cra, customer: Option[models.Customer])(content: Html)
+
+@title(exportTitle: java.lang.String, cra: models.Cra, customer: Option[models.Customer])  = @{
+	val customerName = customer.map(_.name).getOrElse("complet").capitalize
+	String.format("%s_%s_%s_%s", exportTitle.capitalize, cra.year, cra.month.label, customerName)
+}
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+    <meta charset="utf-8"/>
+    <title>@title(exportTitle, cra, customer)</title>
+    <link rel="stylesheet" type="text/css" media="all" href="/assets/stylesheets/export.css"/>
+	<link rel="shortcut icon" type="image/ico" href="/favicon.ico">
+</head>
+<body>
+    @content
+</body>
+</html>

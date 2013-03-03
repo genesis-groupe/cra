@@ -1,0 +1,255 @@
+// Reset effect from Bootstrap
+.calendar {
+  	tr {
+		th, td {
+			border: 0px;
+		}
+  	}
+}
+
+/*
+ * ~~~~~~~~
+ * Calendar
+ * ~~~~~~~~
+ */
+
+ // Mixin couleur de fond
+.backgroundColorMixin(@from, @to) {
+	background-color: @from; // Only for IE !
+	background: -webkit-linear-gradient(top left, @from, @to);
+	background: -moz-linear-gradient(top left, @from, @to);
+	background: linear-gradient(top left, @from, @to);
+}
+
+// Border
+@calendarBorder: rgb(230,230,230);
+@weekSeparator: gray;
+
+/*
+ * ~~~~
+ * Date
+ * ~~~~
+ */
+// Week
+@dateBackgroundColor: rgb(230,230,230);
+
+// Sunday
+@sundayDateBCTo: gray;
+@sundayDateBCFrom: fade(@sundayDateBCTo, 50%);
+
+// Saturday
+@saturdayDateBCFrom: @dateBackgroundColor;
+@saturdayDateBCTo: @sundayDateBCFrom;
+
+// Day off
+@dayOffDateBCFrom: red;
+@dayOffDateBCTo: @dateBackgroundColor;
+@dayOffSaturdayDateBCTo: @saturdayDateBCTo;
+@dayOffSundayDateBCTo: @sundayDateBCTo;
+
+// Jour semaine
+.pastOrFutureDateProperties{
+	opacity: 0.5;
+}
+// Samedi
+.saturdayDateProperties {
+	.backgroundColorMixin(@saturdayDateBCFrom, @saturdayDateBCTo);
+}
+// Dimanche
+.sundayDateProperties {
+	.backgroundColorMixin(@sundayDateBCFrom, @sundayDateBCTo);
+	border-right: 1px solid @sundayDateBCTo;
+}
+// Jour férié semaine
+.dayOffDateProperties {
+	.backgroundColorMixin(@dayOffDateBCFrom, @dayOffDateBCTo);
+	border-left: 1px solid @dayOffDateBCFrom;
+	color: white;
+}
+// Jour férié samedi
+.dayOffSaturdayDateProperties {
+	.backgroundColorMixin(@dayOffDateBCFrom, @dayOffSaturdayDateBCTo);
+}
+// Jour férié dimanche
+.dayOffSundayDateProperties {
+	.backgroundColorMixin(@dayOffDateBCFrom, @dayOffSundayDateBCTo);
+	border-right: 1px solid @dayOffSundayDateBCTo;
+}
+
+
+/*
+ * ~~~~
+ * Days
+ * ~~~~
+ */
+@dayBC: white;
+@selectDayBC: rgb(230,230,230);
+@pastOrFutureDayBC: @dayBC;
+// Journée passé / future
+.pastOrFutureProperties { // <TD>
+	background-color: @pastOrFutureDayBC;
+	cursor: default;
+	div {
+		opacity: 0.5;
+	}
+}
+
+/*
+ * ~~~~
+ * Periods
+ * ~~~~
+ */
+@fadPercent: 75%;
+ // Couleur par défaut
+@defaultPeriodBC: whitesmoke;
+// Congé
+@holidayPeriodBColor: fade(red, @fadPercent);
+// Mission/Client
+@customerPeriodBColor: fade(blue, @fadPercent);
+// Genesis Presales
+@presalesPeriodBColor: fade(green, @fadPercent);
+// Genesis Internal Work
+@internalWorkPeriodBColor: fade(yellow, @fadPercent);
+// Journée avec heure particulière (heure supp, astreinte)
+@specialPeriodBColor:fade(orange, @fadPercent);
+// Genesis Temps Partiel
+@partTimePeriodBColor:fade(pink, @fadPercent);
+
+@theoreticalWorkingDaysBColor: fade(black, @fadPercent);
+
+// Congée
+.holidayPeriodProperties {
+	background-color: @holidayPeriodBColor;
+	color: white;
+}
+// Mission/Client
+.customerPeriodProperties {
+	background-color: @customerPeriodBColor;
+	color: white;
+}
+// Genesis
+.presalesPeriodProperties {
+	background-color: @presalesPeriodBColor;
+	color: white;
+}
+.internalWorkPeriodProperties {
+	background-color: @internalWorkPeriodBColor;
+	color: black;
+}
+.unpaidPeriodProperties {
+	background-color: @partTimePeriodBColor;
+	color: black;	
+}
+// Heure(s) particulière(s) (heure supp, astreinte)
+.specialPeriodProperties {
+	background-color: @specialPeriodBColor;
+	color: black;
+}
+
+.theoreticalWorkingDays {
+	background-color: @theoreticalWorkingDaysBColor;
+	color: white;
+}
+
+.calendar {
+	input[type="checkbox"] {
+		margin: 0 2px 2px 0;
+	}
+	.icon-trash{
+		color: red;
+	}
+	thead {
+		th#topleft{
+			width: 20px;
+		}
+	}
+	tbody {
+		tr.weekDate { // <TR>
+			border-top: 1px solid @weekSeparator;
+			border-left: 1px solid @calendarBorder;
+			border-right: 1px solid @sundayDateBCTo;
+			td.dayHeader {
+				padding-top: 2px;
+				padding-bottom: 2px;
+				height: 10px;
+				background-color: @dateBackgroundColor;
+				&.dayOff {
+					.dayOffDateProperties;
+				}
+				&.saturday {
+					.saturdayDateProperties;
+					&.dayOff {
+						.dayOffDateProperties;
+						.dayOffSaturdayDateProperties;
+					}
+				}
+				&.sunday {
+					.sundayDateProperties;
+					&.dayOff {
+						.dayOffDateProperties;
+						.dayOffSundayDateProperties;
+					}
+				}
+				&.pastOrFuture {
+					.pastOrFutureDateProperties;
+				}
+			}
+		}
+		tr.weekDay { // <TR>
+			td.dayBody { //TD
+				padding-top: 2px;
+				padding-bottom: 2px;
+				border-left: 1px solid @calendarBorder;
+				border-right: 1px solid @calendarBorder;
+				text-align: center;
+				font-weight: bold;
+				background-color: @dayBC;
+				&.pastOrFuture{
+					.pastOrFutureProperties;
+				}
+				div:last-child {
+					margin-top: 5px;
+				}
+				&:hover {
+					background-color: @selectDayBC;
+					cursor: pointer;
+					&:first-child {
+						background-color: @dayBC;
+						cursor: default;
+					}
+					&.pastOrFuture {
+						.pastOrFutureProperties;
+					}
+
+				}
+				div { // <DIV>
+					border-radius: 5px;
+					border: 1px solid @calendarBorder;
+					background-color: @defaultPeriodBC;
+					height: 18px;
+					&.holiday {
+						.holidayPeriodProperties;
+					}
+					&.customer {
+						.customerPeriodProperties;
+					}
+					&.presales {
+						.presalesPeriodProperties;
+					}
+					&.internalWork {
+						.internalWorkPeriodProperties;
+					}
+					&.special {
+						.specialPeriodProperties;
+					}
+					&.unpaid {
+						.unpaidPeriodProperties;
+					}
+				}
+			}
+		}
+		tr:last-child {
+			border-bottom: 1px solid @calendarBorder;
+		}
+	}
+}

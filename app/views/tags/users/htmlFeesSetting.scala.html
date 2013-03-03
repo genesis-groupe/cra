@@ -1,0 +1,73 @@
+@(brands: java.util.List[constants.Vehicles.Brand])
+
+@import constants._
+@import tags.functions._
+
+<div id="divFeesSetting" class="hide">
+    <div class="row">
+        <div class="span5">
+        	<form class="well form-horizontal medium-width" id="formFees">
+        		<legend>Mon véhicule</legend>
+        	   	<ul class="nav nav-tabs" id="tabFees">
+        	        <li class="pull active" id="tabHeaderCar">
+        	            <a id='tabCar' href="#tabPaneCar" data-toggle="tab">Voiture</a>
+        	        </li>
+        	        <li class="pull" id="tabHeaderMotorcycle">
+        	            <a id='tabMotorcycle' href="#tabPaneMotorcycle" data-toggle="tab">Deux roues</a>
+        	        </li>
+        	    </ul>
+        	    <div class="tab-content">
+        	        <div class="tab-pane active" id="tabPaneCar">
+        	   			<div class="control-group">
+                            <label class="control-label" for="fiscalPower">Puissance fiscale</label>
+                            <div class="controls">
+                                <select class="input-mini" id="fiscalPower" name="fiscalPower" required="required">
+                                @selectPlaceholder("Puissance")
+        						@for(i <- 1 to 15) {
+        							<option value="@i">@i</option>
+        						}
+        						</select>
+                            </div>
+                        </div>
+        	        </div>
+        	        <div class="tab-pane" id="tabPaneMotorcycle">
+        	   			<div class="control-group">
+                            <label class="control-label" for="capacity">Cylindrée</label>
+                            <div class="controls">
+                                <select class="input-medium" id="capacity" name="capacity">
+                                    @selectPlaceholder("Cylindrée")
+        							<option value="0">De 0 à 500</option>
+        							<option value="501">Plus de 500</option>
+        						</select>
+                            </div>
+                        </div>		
+        	        </div>
+        	    </div>
+                <div class="control-group">
+                    <label class="control-label" for="brand">Marque</label>
+                    <div class="controls">
+                        <select class="input-medium" id="brand" name="brand" required="required">
+	                        @selectPlaceholder("Marque")
+                            @for(brand <- brands) {
+                                <option value="@brand.code">@brand.label</option>
+                            }
+        				</select>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="control-group">
+                        <label class="control-label" for="matriculation">Immatriculation</label>
+                        <div class="controls">
+                            <input type="text" class="input-small" name="matriculation" id="matriculation" required="required">
+                        </div>
+                    </div>
+                </div>
+        	    <div class="control-group">
+                    <div class="controls pull-right">
+                        <input type="submit" class="btn btn-primary" value="Sauvegarder">
+                    </div>
+                </div>
+            </form>  
+        </div>
+    </div>
+</div>

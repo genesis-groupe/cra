@@ -1,0 +1,152 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET     /                                                       			        controllers.Application.index()
+
+# Authentication
+# ~~~~
+GET     /login                                                  			        controllers.Application.login()
+POST    /login                                                  			        controllers.Application.authenticate()
+GET     /logout                                                 			        controllers.Application.logout()
+
+# Cras
+# ~~~~
+# HTML
+GET		/cra												    			        controllers.Cras.show()
+# Json
+POST	/cra												    			        controllers.Cras.save()
+POST    /cra/comment                                            			        controllers.Cras.saveComment()
+POST    /cra/standBys                                           			        controllers.Cras.saveStandBys()
+DELETE  /cra/:id/comment                                        			        controllers.Cras.deleteComment(id: helpers.binder.ObjectIdW)
+GET		/cra/:trigramme/:year/:month/fees                       			        controllers.Cras.fetchFees(trigramme: String, year: java.lang.Integer, month: java.lang.Integer)
+GET		/cra/:trigramme/:year/:month	                        			        controllers.Cras.fetch(trigramme: String, year: java.lang.Integer, month: java.lang.Integer)
+DELETE  /cra/:trigramme/:year/:month/:day                       			        controllers.Cras.deleteDay(trigramme: String, year: java.lang.Integer, month: java.lang.Integer, day: java.lang.Integer)
+PUT     /cra/:id/validate                                       			        controllers.Cras.validate(id: helpers.binder.ObjectIdW)
+PUT     /cra/:id/invalidate                                     			        controllers.Cras.invalidate(id: helpers.binder.ObjectIdW)
+GET		/cra/:trigramme/:year/:month/customers								        controllers.Cras.fetchCustomers(trigramme: String, year: java.lang.Integer, month: java.lang.Integer)
+
+# Pays
+# ~~~~
+# HTML
+GET		/pay    											    			        controllers.Pays.show()
+# Json
+GET 	/pay/:trigramme/:year/:month/:hourlyRate			    			        controllers.Pays.fetch(trigramme: String, year: java.lang.Integer, month: java.lang.Integer, hourlyRate: helpers.binder.BigDecimalW)
+PUT		/pay/:id/validate 									    			        controllers.Pays.validate(id: helpers.binder.ObjectIdW)
+PUT		/pay/:id/invalidate 								    			        controllers.Pays.invalidate(id: helpers.binder.ObjectIdW)
+
+# Accounts
+# ~~~~
+# HTML
+GET		/account										        			        controllers.Accounts.showAccount()
+# Json
+GET     /account/vehicle                                        			        controllers.Accounts.fetchVehicle()
+POST    /account/vehicle                                        			        controllers.Accounts.saveVehicle()
+GET     /account/globalSetting                                  			        controllers.Accounts.fetchGlobalSetting()
+GET     /account/manager/:trigramme                             			        controllers.Accounts.saveManager(trigramme: String)
+GET     /account/email/:email                                   			        controllers.Accounts.saveEmail(email: String)
+POST    /employee/password                                      			        controllers.Accounts.changePassword()
+GET     /employee/standBy/:showStandBy                          			        controllers.Accounts.changeStandByOption(showStandBy: String)
+
+# PartsTimes
+# ~~~~
+# Json
+POST	/partTime									    			                controllers.PartsTimes.addPartTime()
+GET 	/partTime									    			                controllers.PartsTimes.getPartTime()
+GET 	/partTime/isEnabled                  		    			                controllers.PartsTimes.isPartTimeEnabled()
+GET 	/partTime/disable                   		    			                controllers.PartsTimes.disablePartTime()
+
+# Employees
+# ~~~~
+# Json
+GET     /employee/:trigramme/missions/standby/:year/:week           			    controllers.Employees.fetchMissionsWithStandby(trigramme: String, year: java.lang.Integer, week: java.lang.Integer)
+GET     /employee/:trigramme/missions/:year/:month              			        controllers.Employees.fetchMissions(trigramme: String, year: java.lang.Integer, month: java.lang.Integer)
+GET     /employee/:trigramme/feesMissions                          			        controllers.Employees.fetchFeesMission(trigramme: String)
+POST    /employees/upload                                                           controllers.Employees.upload()
+
+# Holidays
+# ~~~~
+# HTML
+GET		/holiday                                                			        controllers.Holidays.show()
+# Json
+POST    /holiday/oneday                                         			        controllers.Holidays.createOneDayHoliday()
+POST    /holiday/period                                         			        controllers.Holidays.createHolidayPeriod()
+POST    /holiday/recurrent                                      			        controllers.Holidays.createHolidayRecurrent()
+GET     /holidays/:trigramme/:year                              			        controllers.Holidays.fetchHolidays(trigramme: String, year: java.lang.Integer)
+POST    /holidays/delete                                        			        controllers.Holidays.deleteHoliday()
+POST    /holidaysExisteOnDates                                  			        controllers.Holidays.holidaysExisteOnDates()
+
+# Fees
+# ~~~~
+# HTML
+GET		/fees																        controllers.Fees.show()
+POST	/fees																        controllers.Fees.create()
+GET		/fees/:trigramme/:year/:month										        controllers.Fees.fetch(trigramme: String, year: java.lang.Integer, month: java.lang.Integer)
+POST	/fees/delete														        controllers.Fees.delete()
+GET 	/feesType   														        controllers.Fees.fetchType()
+
+# Exports
+# ~~~~
+# HTML
+GET     /export/:format/cra/:trigramme/:year/:month/customer/:customerId         	controllers.Exports.craCustomer(format: String, trigramme: String, year: java.lang.Integer, month: java.lang.Integer, customerId: helpers.binder.ObjectIdW)
+GET     /export/:format/cra/:trigramme/:year/:month/customer/:customerId/:fileName	controllers.Exports.downloadCraCustomer(format: String, trigramme: String, year: java.lang.Integer, month: java.lang.Integer, customerId: helpers.binder.ObjectIdW, fileName: java.lang.String)
+GET     /export/:format/cra/:trigramme/:year/:month                       	        controllers.Exports.craEmployee(format: String, trigramme: String, year: java.lang.Integer, month: java.lang.Integer)
+GET     /export/:format/cra/:trigramme/:year/:month/:fileName                       controllers.Exports.downloadCraEmployee(format: String, trigramme: String, year: java.lang.Integer, month: java.lang.Integer, fileName: java.lang.String)
+
+GET     /export/:format/pay/:trigramme/:year/:month/:hourlyRate/customer/:customerId            controllers.Exports.payCustomer(format: String, trigramme: String, year: java.lang.Integer, month: java.lang.Integer, hourlyRate: helpers.binder.BigDecimalW, customerId: helpers.binder.ObjectIdW)
+GET     /export/:format/pay/:trigramme/:year/:month/:hourlyRate/customer/:customerId/:fileName  controllers.Exports.downloadPayCustomer(format: String, trigramme: String, year: java.lang.Integer, month: java.lang.Integer, hourlyRate: helpers.binder.BigDecimalW, customerId: helpers.binder.ObjectIdW, fileName: java.lang.String)
+GET     /export/:format/pay/:trigramme/:year/:month/:hourlyRate                     	        controllers.Exports.payEmployee(format: String, trigramme: String, year: java.lang.Integer, month: java.lang.Integer, hourlyRate: helpers.binder.BigDecimalW)
+GET     /export/:format/pay/:trigramme/:year/:month/:hourlyRate/:fileName	                    controllers.Exports.downloadPayEmployee(format: String, trigramme: String, year: java.lang.Integer, month: java.lang.Integer, hourlyRate: helpers.binder.BigDecimalW, fileName: java.lang.String)
+
+# Times
+# ~~~~
+# Json
+POST     /computeWorkingDays                                    			        controllers.Times.computeWorkingDays()
+POST     /computeWorkingRecurrentDays                           			        controllers.Times.computeWorkingRecurrentDays()
+POST     /isWorkingDay                                          			        controllers.Times.isWorkingDay()
+GET      /nbOpenedDays/:year/:month                             			        controllers.Times.getNbOpenedDays(year: java.lang.Integer, month: java.lang.Integer)
+
+# Backoffice
+# ~~~~
+GET     /backoffice                                                                 controllers.Backoffice.show()
+
+# Customer
+# ~~~~
+GET     /customers/:id  															controllers.Customers.fetch(id : helpers.binder.ObjectIdW)
+GET     /customers															        controllers.Customers.all()
+POST    /customers															        controllers.Customers.create()
+PUT     /customers/:id															    controllers.Customers.update(id: helpers.binder.ObjectIdW)
+PUT     /customers/:id/missions                       		                        controllers.Customers.addMission(id: helpers.binder.ObjectIdW)
+GET     /customers/:id/missions                       		                        controllers.Customers.fetchMissions(id: helpers.binder.ObjectIdW)
+
+# Missions
+# ~~~~
+# Json
+GET     /missions/:id                                         			            controllers.Missions.fetch(id: helpers.binder.ObjectIdW)
+PUT     /missions/:id                                         			            controllers.Missions.update(id: helpers.binder.ObjectIdW)
+POST    /missions/fetch                                         			        controllers.Missions.fetchByIds()
+
+# Employees
+# ~~~~
+# Json
+GET     /employees/:trigramme                                          			    controllers.Employees.fetch(trigramme: java.lang.String)
+GET     /employees                                              			        controllers.Employees.all()
+PUT     /employees/:id/affectedMissions                            			        controllers.Employees.addAffectedMission(id: helpers.binder.ObjectIdW)
+DELETE  /employees/:id/affectedMissions/:affectedMissionId          		        controllers.Employees.removeAffectedMission(id: helpers.binder.ObjectIdW, affectedMissionId: helpers.binder.ObjectIdW)
+PUT     /employees/:id                                                   			controllers.Employees.update(id: helpers.binder.ObjectIdW)
+POST    /employees                                               			        controllers.Employees.create()
+# Roles
+# ~~~~
+GET		/roles																        controllers.Roles.all()
+GET		/roles/:id																    controllers.Roles.fetch(id: helpers.binder.ObjectIdW)
+
+# Javascript routing
+# ~~~~
+GET     /assets/javascripts/routes                              			        controllers.Application.javascriptRoutes()
+
+# Map static resources from the /public folder to the /assets URL path
+# ~~~~
+GET     /humans.txt															        controllers.Assets.at(path="/public", file="/humans.txt")
+GET     /robots.txt															        controllers.Assets.at(path="/public", file="/robots.txt")
+GET     /assets/*file														        controllers.Assets.at(path="/public", file)

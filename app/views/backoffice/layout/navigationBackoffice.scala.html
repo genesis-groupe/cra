@@ -1,0 +1,21 @@
+@(userConnected: models.User=null, empty: java.lang.Boolean = false, activeMenu: constants.Menus = null)
+
+@import constants._
+@import be.objectify.deadbolt.views.html._
+@import be.objectify.deadbolt.utils.TemplateUtils._
+@import security._
+@import tags.functions._
+
+<div class="navbar navbar-fixed-top noPrint">
+	<div class="navbar-inner">
+		<div class="container">
+			<a class="brand" href="@routes.Application.index">Genesis</a>
+			@if(!empty){
+
+				<ul class="nav pull-right">
+                     <li><a href="@routes.Application.logout">Se déconnecter</a></li>
+				</ul>
+			}
+		</div>
+	</div>
+</div>

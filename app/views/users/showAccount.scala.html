@@ -1,0 +1,78 @@
+@(userConnected: models.User=null,
+brands: java.util.List[constants.Vehicles.Brand],
+managers: java.util.List[models.Employee])
+
+@import constants._
+@import tags.functions._
+@import tags.users._
+@import be.objectify.deadbolt.views.html._
+@import be.objectify.deadbolt.utils.TemplateUtils._
+@import security._
+
+@scripts={
+    <script type="text/javascript">
+        "use strict";
+        $(function() {
+            @* Affichage *@
+            var divName = _.strRight($("li.active").children("a").attr("href"),"#"),
+                $divs= [
+                    $("#divChangePassword"),
+                    $("#divFeesSetting"),
+                    $("#divPartTimeSetting"),
+                    $("#divGlobalSettings")
+                ];
+            $(window).trigger("ShowAccount:" + divName, this);
+
+            $("a.settingsMenu").on("click", function(event){
+            	event.preventDefault();
+                divName = _.strRight($(this).attr("href"),"#");
+                _.each($divs, function($div, index, list){
+                    $div.hide();
+                });
+            	$("ul.nav-list > li.active").removeClass("active");
+            	$(this).parent("li").addClass("active");
+                $(window).trigger("ShowAccount:" + divName, this);
+            });
+        });
+    </script>
+}
+
+@main(userConnected, scripts, null){
+    <div class="row">
+		<div class="span3">
+			<ul class="nav nav-list navbar-inner settingMenu">
+				<li class="nav-header">
+                    <a href="@routes.Accounts.showAccount"><h5>@formatUserName(userConnected)</h5></a>
+                </li>
+				<li class="divider"></li>
+				<li class="active">
+                    <a class="settingsMenu" id="globalSettings" href="#divGlobalSettings">
+                        <i class="icon-chevron-right"></i> Global
+                    </a>
+                </li>
+                <li>
+                    <a class="settingsMenu" id="changePassword" href="#divChangePassword">
+                        <i class="icon-chevron-right"></i> Mot de passe
+                    </a>
+                </li>
+				<li>
+                    <a class="settingsMenu" id="fees" href="#divFeesSetting">
+                        <i class="icon-chevron-right"></i> Véhicule
+                    </a>
+                </li>
+				<li>
+                    <a class="settingsMenu" id="partTime" href="#divPartTimeSetting">
+                        <i class="icon-chevron-right"></i> Temps Partiel
+                    </a>
+                </li>
+				&nbsp;
+			</ul>
+		</div>
+    	<div class="span9">
+            @htmlChangePassword()
+            @htmlFeesSetting(brands)
+            @htmlPartTime()
+            @htmlGlobalSettings(managers)
+        </div>
+	</div>
+}

@@ -1,0 +1,123 @@
+<div class="modal hide" id="day">
+    <div class="modal-header alert-block">
+        <button type="button" class="close" data-dismiss="modal">×</button>
+        <h5><span id="days"></span>&nbsp;<span id="month"></span>&nbsp;<span id="year"></span></h5>
+    </div>
+    <div class="modal-body">
+        <div class="tabbable">
+            <ul class="nav nav-pills">
+                <li class="tab-header" id="tabHeaderNormal"><a id='tabNormal' href="#tabPaneNormal" data-toggle="tab">Saisie normale</a></li>
+                <li class="tab-header pull-right" id="tabHeaderSpecial"><a id='tabSpecial' href="#tabPaneSpecial" data-toggle="tab">Saisie "exceptionnelle"</a></li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active" id="tabPaneNormal">
+                    <form class="well form-horizontal" name="formNormal" id="formNormal">
+                        <fieldset>
+                            <div class="control-group">
+                                <label class="control-label" for="morningMission">Matin</label>
+                                <div class="controls">
+                                    <select class="input-xlarge missionList" name="morningMission" id="morningMission" data-halfType="MORNING">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" for="afternoonMission">Après-midi</label>
+                                <div class="controls">
+                                    <select class="input-xlarge missionList" name="afternoonMission" id="afternoonMission" data-halfType="AFTERNOON">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <div class="controls pull-right">
+                                    <input type="submit" class="btn btn-primary" value="Sauvegarder">
+                                    <button class="btn" data-dismiss="modal">Annuler</button>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="tab-pane" id="tabPaneSpecial">
+                    <div class="row">
+                        <div class="span6">
+                            <form id="formSpecial">
+                                <table class="well well-small table table-condensed" id="newPeriod">
+                                    <thead>
+                                        <tr>
+                                            <th>Client</th>
+                                            <th>Quand</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td rowspan="2">
+                                                <select class="input-xlarge missionList" name="specialMission" id="specialMission" required="required"></select>
+                                            </td>
+                                            <td>
+                                                <label class="radio inline">
+                                                    <input type="radio" name="periodType" id="periodMorning" value="MORNING">Matin
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <label class="radio inline">
+                                                    <input type="radio" name="periodType" id="periodAfternoon" value="AFTERNOON">Après-midi
+                                                </label>
+                                            </td>
+                                            <td rowspan="2">
+                                                <input type="submit" class="btn btn-small btn-primary" value="+">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                                <div class="inline">
+                                                    <input type="radio" name="periodType" id="periodSpecial" value="SPECIAL">
+                                                    @* http://stackoverflow.com/questions/1494671/what-is-a-javascript-regular-expression-for-matching-time-in-military-24-hour *@
+                                                    <input type="text" class="input-mini timeInput" id="startTimePeriodSpecial" name="startTimePeriodSpecial" placeholder="08:30" required="required" pattern="([01]\d|2[0-3]):([0-5]\d)" title="format HH:mm">
+                                                    @* http://stackoverflow.com/questions/1494671/what-is-a-javascript-regular-expression-for-matching-time-in-military-24-hour *@
+                                                    <input type="text" class="input-mini timeInput" id="endTimePeriodSpecial" name="endTimePeriodSpecial" placeholder="12:00" required="required" pattern="([01]\d|2[0-3]):([0-5]\d)" title="format HH:mm">
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr id="overlapPeriodLine" class="hide">
+                                            <td colspan="5" >
+                                                <span class="label label-important" id="overlapPeriod">
+                                                    <span id="overlapPeriodMsg"></span>
+                                                    <i class="icon-remove" id="closeOverlapPeriod"></i>
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="span6 scrollableSpan">
+                            <table class="table table-bordered table-condensed" id="tableSpecialPeriods" >
+                                <thead>
+                                    <tr>
+                                        <th>Activité</th>
+                                        <th>Demi journée</th>
+                                        <th>De</th>
+                                        <th>A</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="span6">
+                            <div class="control-group">
+                                <div class="controls pull-right">
+                                    <input type="button" class="btn btn-primary" id="saveBtn" value="Sauvegarder">
+                                    <button class="btn" data-dismiss="modal">Annuler</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

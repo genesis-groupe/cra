@@ -1,0 +1,8 @@
+@(id_1: String, value_1: String, id_2: String = null, value_2: String = null)
+
+<div class="form-actions">
+	<input type="submit" class="btn btn-primary" id="@id_1" name="@id_1" value="@value_1"/>
+	@if(id_2 != null){
+		<button class="btn" id="@id_2" name="@id_2">@value_2</button>
+	}
+</div>

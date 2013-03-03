@@ -1,0 +1,139 @@
+<div class="row-fluid">
+	<div class="span3">
+		<h4><a data-ng-href="#/employees"><i class="icon-arrow-left"></i></a>&nbsp;{{employee.firstName | capitalize}} {{employee.lastName | capitalize}}</h4>
+
+		<form class="well" id="edit-employee-form" ng-submit="save()">
+			<div class="control-group">
+				<label class="control-label">Username <i class="icon-mandatory"></i>
+					<div class="controls">
+						<input type="text" class="span12" required placeholder="username" data-ng-model="employee.username">
+					</div>
+				</label>
+			</div>
+			<div class="control-group">
+				<label class="control-label">Prénom <i class="icon-mandatory"></i>
+					<div class="controls">
+						<input type="text" class="span12" required placeholder="Prénom" data-ng-model="employee.firstName">
+					</div>
+				</label>
+			</div>
+			<div class="control-group">
+				<label class="control-label">Nom <i class="icon-mandatory"></i>
+					<div class="controls">
+						<input type="text" class="span12" required placeholder="Nom" data-ng-model="employee.lastName">
+					</div>
+				</label>
+			</div>
+			<div class="control-group">
+				<label class="control-label">Trigramme <i class="icon-mandatory"></i>
+
+					<div class="controls">
+						<input type="text" class="span12" required placeholder="Trigramme" data-ng-model="employee.trigramme">
+					</div>
+				</label>
+			</div>
+			<div class="control-group">
+				<label class="control-label">Email <i class="icon-mandatory"></i>
+					<div class="controls">
+						<input type="email" class="span12" required placeholder="Email" data-ng-model="employee.email">
+					</div>
+				</label>
+			</div>
+			<div class="control-group">
+				<label class="control-label">Role <i class="icon-mandatory"></i>
+					<div class="controls">
+						<select class="span12" data-ng-model="employee.role.id" required data-ng-options="role.id as role.label for role in roles">
+							<option value="">-- choose a role --</option>
+						</select>
+					</div>
+				</label>
+			</div>
+			<div class="control-group">
+				<label class="control-label">Manager
+					<input type="checkbox" name="isManager" id="isManager" data-ng-model="employee.isManager">
+				</label>
+			</div>
+			<div class="form-actions">
+				<input type="submit" class="btn btn-primary span9" value="Save">
+			</div>
+		</form>
+	</div>
+	<div class="span9">
+		<div class="row-fluid">
+			<div class="span4">
+				<span>{{filteredAffectedMissions.length}}</span>
+				<span data-ng-pluralize data-count="totalAffectedMissions" data-when="{'0': 'No Mission',
+																                        'one': ' / 1 Mission',
+																                        'other': ' / {} Missions'}">
+				</span>
+			</div>
+			<div class="span4">
+				<label>Only customer
+					<input type="checkbox" data-ng-model="affectedMissionFilter.onlyCustomers">
+				</label>
+			</div>
+			<div class="span4">
+				<input type="text" data-ng-model="affectedMissionFilter.filter">
+			</div>
+		</div>
+		<div class="row-fluid">
+			<div class="span12" style="height:350px; overflow-y:auto; overflow-x:hidden;">
+				<div class="row-fluid" data-ng-repeat="mission in filteredAffectedMissions" style="background-color: whiteSmoke; border: 1px solid #E3E3E3; border-radius: 4px;">
+					<div class="span4"><a data-ng-href="#/customer/{{mission.mission.customerId}}"><strong>{{mission.mission.customerName | capitalize}}</strong></a></div>
+					<div class="span4"><a data-ng-href="#/mission/{{mission.mission.id}}"><strong>{{mission.mission.code | uppercase}}</strong></a></div>
+					<div class="span3">
+						<span data-ng-show="mission.startDate">{{mission.startDate}}</span>
+						<span data-ng-show="mission.endDate"><i class="icon-arrow-right"></i> {{mission.endDate}}</span>
+					</div>
+					<div class="span1">
+						<button class="btn btn-danger btn-small" data-ng-click="removeMission(mission.mission.id)"><i class="icon-trash"></i></button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<hr>
+		<div class="row-fluid well well-small" data-ng-controller="EmployeeCustomerController">
+			<div class="span6">
+				<div class="row-fluid">
+					<div class="span3">
+						<h6>Customers</h6>
+					</div>
+					<div class="span9">
+						<input type="text" class="span9" data-ng-model="customerFilter.name">
+					</div>
+				</div>
+				<div style="height:100px; overflow-y:auto; overflow-x:hidden;">
+					<table class="table table-condensed table-bordered table-striped table-hover">
+						<tbody>
+							<tr data-ng-repeat="customer in customers | filter:customerFilter" data-ng-class="{'info' : customer == selectedCustomer} ">
+								<td>
+									<a data-ng-href="#/customer/{{customer.id}}"><strong>{{customer.name | capitalize}}</strong></a>
+									<i class="icon-list pull-right" data-ng-click="listMissions(customer.id)"></i>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="span6">
+				<div data-ng-show="selectedCustomer">
+					<h6>Missions de {{selectedCustomer.name | capitalize}}</h6>
+
+					<div style="height:150px; overflow-y:auto; overflow-x:hidden;">
+						<table class="table table-condensed table-striped table-hover">
+							<tbody>
+								<tr data-ng-repeat="mission in selectedCustomer.missions">
+									<td>
+										<a data-ng-href="#/mission/{{mission.id}}"><strong>{{mission.code | uppercase}}</strong></a>
+										<button class="btn btn-small pull-right" data-ng-click="selectMission(mission.id)"><i class="icon-plus"></i></button>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>

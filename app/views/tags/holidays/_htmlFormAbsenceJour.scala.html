@@ -1,0 +1,24 @@
+@(employees: java.util.List[models.Employee], holidays: java.util.List[models.Mission], connectedUser: models.User=null)
+
+<form class="well form-horizontal medium-width" id="formDay">
+    @_htmlInputEmployeeMission(employees, holidays, connectedUser)
+    <div class="control-group">
+        <label class="control-label" for="date">Absent(e) le <i class="icon-mandatory"></i></label>
+        <div class="controls">
+            <input type="text" class="input-small datepicker" id="date" name="date" required>
+            &nbsp;
+            <label class="checkbox inline">
+                <input type="checkbox" id="morning" name="morning" value="true" checked> Matin
+            </label>
+            <label class="checkbox inline">
+                <input type="checkbox" id="afternoon" name="afternoon" value="true" checked> Après-midi
+            </label>
+        </div>
+    </div>
+    <div class="control-group">
+        <center>
+            <span class="label label-info hide" id="infoNbDayOnDayForm"></span>
+        </center>
+    </div>   
+    @_htmlInputCommentAndButton()
+</form>

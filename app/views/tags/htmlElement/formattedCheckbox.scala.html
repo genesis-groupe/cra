@@ -1,0 +1,9 @@
+@(id: String, label: String, isRequired: Boolean = false)
+
+<div class="control-group">
+	<label class="control-label" for="@id">@label @if(isRequired){<i class="icon-mandatory"></i>}</label>
+	<div class="controls">
+		<input type="checkbox" id="@id" name="@id" value="true" @if(isRequired){required}>
+
+	</div>
+</div>

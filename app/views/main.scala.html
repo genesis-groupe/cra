@@ -1,0 +1,26 @@
+@(userConnected: models.User=null, moreScripts: Html = Html(""), activeMenu: constants.Menus = null)(content: Html)
+
+@import layout._
+@import tags.htmlElement._
+
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+	@header()
+</head>
+<body class="bodyWithFooter">
+    @waitters()
+    @navigation(userConnected = userConnected, activeMenu = activeMenu)
+    <div class="container">
+        <div class="row" id="content">
+            <div class="span12">
+                @content
+            </div>
+        </div>
+    </div>
+    @** Start Script **@
+	@scripts()
+	@moreScripts
+</body>
+</html>

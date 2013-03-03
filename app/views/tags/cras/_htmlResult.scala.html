@@ -1,0 +1,11 @@
+@(showToolbar: java.lang.Boolean = true)
+<div class="hide" id="craResult">
+    @_htmlPrintInfo()
+    @_htmlToolbar(showToolbar)
+    <div id="calendar"></div>
+    @_htmlLegend()
+</div>
+@_htmlDay()
+@_htmlStandby()
+@_htmlFee()
+@_htmlCalendarTemplate()

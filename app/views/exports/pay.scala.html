@@ -1,0 +1,22 @@
+@(pay: models.Pay, cra: models.Cra, customer: Option[models.Customer])
+
+@import export.pay.ExportDetailedTimesDistribution
+@import export.ExportTotal
+@import export.ExportSignature
+@import export.ExportFees
+@import export.ExportComment
+@import export.ExportCalendar
+@import export.ExportHeader
+
+@mainExport("Rémunération", cra, customer){
+<div class="export pay">
+    @*ExportHeader(cra, customer)
+    @ExportCalendar(cra, customer, true)
+    @ExportTotal(cra, customer)
+    @ExportComment(cra, customer)
+    @ExportSignature(customer)
+    @ExportFees(cra, customer)
+    @ExportDetailedTimesDistribution(pay, cra, customer)*@
+</div>
+
+}

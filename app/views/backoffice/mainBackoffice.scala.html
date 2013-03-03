@@ -1,0 +1,35 @@
+@(userConnected: models.User = null, activeMenu: constants.Menus = null)(content: Html)
+@import backoffice.layout._
+@import constants._
+@import be.objectify.deadbolt.views.html._
+@import be.objectify.deadbolt.utils.TemplateUtils._
+@import security._
+<!DOCTYPE html>
+<html lang="fr" ng-app="app">
+    <head>
+    @headerBackoffice()
+    </head>
+    <body>
+        <div class="container">
+            @navigationBackoffice(userConnected = userConnected, activeMenu = activeMenu)
+            <div class="container">
+                <div class="row-fluid">
+                    <div class="span2">
+                        <ul class="nav nav-list">
+                        @restrict(la(as(RoleName.ADMINISTRATOR))) {
+                            <li data-ng-class="{active: routeIs('/employees')}"><a href="@routes.Backoffice.show#/employees">Employees&nbsp;<i class="icon-chevron-right"></i></a></li>
+                            <li data-ng-class="{active: routeIs('/customers')}"><a href="@routes.Backoffice.show#/customers">Customers&nbsp;<i class="icon-chevron-right"></i></a></li>
+                        }
+                        </ul>
+                    </div>
+                    <div class="span9">
+                        <div data-ng-view></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @** Start Script **@
+        @scriptsBackoffice()
+    </body>
+</html>

@@ -1,0 +1,95 @@
+<script id="calendar-template" type="text/x-handlebars-template">
+    <div class="row-fluid">
+        <div class="span12">
+            <table class="table calendar">
+                <thead>
+                    <tr>
+                        <th id="topleft"><input type="checkbox" class="noPrint" id="monthChk"></th>
+                        <th>lun.</th>
+                        <th>mar.</th>
+                        <th>mer.</th>
+                        <th>jeu.</th>
+                        <th>ven.</th>
+                        <th>sam.</th>
+                        <th>dim.</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#weeks}}
+                        <tr class="weekDate" id="week{{id}}">
+                            <td class="dayHeader">
+                                <input type="checkbox" class="weekChk noPrint">
+                            </td>
+                            <td id="date_{{#calDayIndex this 0 }}{{/calDayIndex}}" data-index="{{#calDayIndex this 0 }}{{/calDayIndex}}"></td>
+                            <td id="date_{{#calDayIndex this 1 }}{{/calDayIndex}}" data-index="{{#calDayIndex this 1 }}{{/calDayIndex}}"></td>
+                            <td id="date_{{#calDayIndex this 2 }}{{/calDayIndex}}" data-index="{{#calDayIndex this 2 }}{{/calDayIndex}}"></td>
+                            <td id="date_{{#calDayIndex this 3 }}{{/calDayIndex}}" data-index="{{#calDayIndex this 3 }}{{/calDayIndex}}"></td>
+                            <td id="date_{{#calDayIndex this 4 }}{{/calDayIndex}}" data-index="{{#calDayIndex this 4 }}{{/calDayIndex}}"></td>
+                            <td id="date_{{#calDayIndex this 5 }}{{/calDayIndex}}" data-index="{{#calDayIndex this 5 }}{{/calDayIndex}}"></td>
+                            <td id="date_{{#calDayIndex this 6 }}{{/calDayIndex}}" data-index="{{#calDayIndex this 6 }}{{/calDayIndex}}"></td>
+                        </tr>
+                        <tr class="weekDay">
+                            <th>
+                                <span id="weekDay_{{id}}"></span><br/>
+                            </th>
+                            <td id="day_{{#calDayIndex this 0 }}{{/calDayIndex}}" data-index="{{#calDayIndex this 0 }}{{/calDayIndex}}">
+                                <div id="day_{{#calDayIndex this 0 }}{{/calDayIndex}}_m" data-index="{{#calDayIndex this 0 }}{{/calDayIndex}}"></div>
+                                <div id="day_{{#calDayIndex this 0 }}{{/calDayIndex}}_a" data-index="{{#calDayIndex this 0 }}{{/calDayIndex}}"></div>
+                            </td>
+                            <td id="day_{{#calDayIndex this 1 }}{{/calDayIndex}}" data-index="{{#calDayIndex this 1 }}{{/calDayIndex}}">
+                                <div id="day_{{#calDayIndex this 1 }}{{/calDayIndex}}_m" data-index="{{#calDayIndex this 1 }}{{/calDayIndex}}"></div>
+                                <div id="day_{{#calDayIndex this 1 }}{{/calDayIndex}}_a" data-index="{{#calDayIndex this 1 }}{{/calDayIndex}}"></div>
+                            </td>
+                            <td id="day_{{#calDayIndex this 2 }}{{/calDayIndex}}" data-index="{{#calDayIndex this 2 }}{{/calDayIndex}}">
+                                <div id="day_{{#calDayIndex this 2 }}{{/calDayIndex}}_m" data-index="{{#calDayIndex this 2 }}{{/calDayIndex}}"></div>
+                                <div id="day_{{#calDayIndex this 2 }}{{/calDayIndex}}_a" data-index="{{#calDayIndex this 2 }}{{/calDayIndex}}"></div>
+                            </td>
+                            <td id="day_{{#calDayIndex this 3 }}{{/calDayIndex}}" data-index="{{#calDayIndex this 3 }}{{/calDayIndex}}">
+                                <div id="day_{{#calDayIndex this 3 }}{{/calDayIndex}}_m" data-index="{{#calDayIndex this 3 }}{{/calDayIndex}}"></div>
+                                <div id="day_{{#calDayIndex this 3 }}{{/calDayIndex}}_a" data-index="{{#calDayIndex this 3 }}{{/calDayIndex}}"></div>
+                            </td>
+                            <td id="day_{{#calDayIndex this 4 }}{{/calDayIndex}}" data-index="{{#calDayIndex this 4 }}{{/calDayIndex}}">
+                                <div id="day_{{#calDayIndex this 4 }}{{/calDayIndex}}_m" data-index="{{#calDayIndex this 4 }}{{/calDayIndex}}"></div>
+                                <div id="day_{{#calDayIndex this 4 }}{{/calDayIndex}}_a" data-index="{{#calDayIndex this 4 }}{{/calDayIndex}}"></div>
+                            </td>
+                            <td id="day_{{#calDayIndex this 5 }}{{/calDayIndex}}" data-index="{{#calDayIndex this 5 }}{{/calDayIndex}}">
+                                <div id="day_{{#calDayIndex this 5 }}{{/calDayIndex}}_m" data-index="{{#calDayIndex this 5 }}{{/calDayIndex}}"></div>
+                                <div id="day_{{#calDayIndex this 5 }}{{/calDayIndex}}_a" data-index="{{#calDayIndex this 5 }}{{/calDayIndex}}"></div>
+                            </td>
+                            <td id="day_{{#calDayIndex this 6 }}{{/calDayIndex}}" data-index="{{#calDayIndex this 6 }}{{/calDayIndex}}">
+                                <div id="day_{{#calDayIndex this 6 }}{{/calDayIndex}}_m" data-index="{{#calDayIndex this 6 }}{{/calDayIndex}}"></div>
+                                <div id="day_{{#calDayIndex this 6 }}{{/calDayIndex}}_a" data-index="{{#calDayIndex this 6 }}{{/calDayIndex}}"></div>
+                            </td>
+                        </tr>
+                    {{/weeks}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row-fluid" id="counters">
+        <div class="span2">
+             <span>Total jours produits</span>
+             <span class="badge customerPeriodProperties" id="nbCustomerDays"></span>
+        </div>
+        <div class="span2">
+             <span>Total AV</span>
+             <span class="badge presalesPeriodProperties" id="nbPresalesDays"></span>
+        </div>
+        <div class="span2">
+             <span>Total TI/F/IC</span>
+             <span class="badge internalWorkPeriodProperties" id="nbInternalWorkDays"></span>
+        </div>
+        <div class="span2">
+             <span>Total absences</span>
+             <span class="badge holidayPeriodProperties" id="nbHolidays"></span>
+        </div>
+        <div class="span2">
+            <span>Total TP/CSS</span>
+            <span class="badge unpaidPeriodProperties" id="nbUnpaidDays"></span>
+        </div>
+        <div class="span2">
+            <span>Nb jours ouvrés</span>
+            <span class="badge theoreticalWorkingDays" id="nbTheoreticalWorkingDays"></span>
+        </div>
+    </div>
+</script>

@@ -1,0 +1,67 @@
+/* Main CSS file for media screen*/
+@media (min-width: 979px) {
+  body {
+	padding-top: 60px;
+	position: relative;
+	&.login {
+	  position: static;
+	}
+  }
+}
+
+.footer {
+  padding: 10px 0;
+  margin-top: 20px;
+  border-top: 1px solid #E5E5E5;
+  background-color: whiteSmoke;
+}
+
+.changelog {
+  overflow: auto;
+  max-height: 540px;
+}
+
+option.placeholder {
+  color: #E5E5E5;
+  font-style: italic;
+}
+
+pre {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+// Calendrier CRA
+@import "/screen/calendar.less";
+
+//Saisie Période
+@import "/screen/day.less";
+
+// Pay
+@import "/screen/pay.less";
+
+//Login
+@import "/screen/login.less";
+
+//Accoount
+@import "/screen/account.less";
+
+//StandBy
+@import "/screen/standby.less";
+
+//FeesCra
+@import "/screen/feesCra.less";
+
+//Waitter
+@import "/screen/waitter.less";
+
+//Waitter
+@import "/screen/common.less";
+
+// For print
+@import "/print.less";
+
+
+
+
+
+

@@ -1,0 +1,26 @@
+@(userConnected: models.User = null)
+
+@import tags.functions._
+
+@main(userConnected = userConnected) {
+	<div class="page-header">
+		<h1>Bonjour @formatUserName(userConnected)</h1>
+	</div>
+	@changeLog()
+	<div class="row">
+		<div class="span12">
+			<h4>En cas de problème</h4>
+			<ul>
+				<li><a href="http://e-learning.genesis-groupe.com/dokeos/">E-learning</a></li>
+				<li> Mail de support : <a href="mailto:support.application@@genesis-groupe.com?subject=[CRA]">support.application@@genesis-groupe.com</a>
+			</ul>
+		</div>
+	</div>
+	<footer class="footer">
+		<div class="container">
+			<p>Developp Hands in the dirty oil With Play framework 2.0, MongoDB, JQuery, Twitter bootstrap</p>
+			<p>By Lucas Pommateau et Frédéric Patin</p>
+		</div>
+	</footer>
+
+}

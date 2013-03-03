@@ -1,0 +1,3 @@
+1100:leodagdag.play2morphia.MorphiaPlugin
+1500:com.typesafe.plugin.CommonsMailerPlugin
+10000:be.objectify.deadbolt.DeadboltPlugin

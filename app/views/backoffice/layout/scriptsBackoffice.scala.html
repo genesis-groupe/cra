@@ -1,0 +1,42 @@
+@defining(
+    play.Play.isDev match {
+        case true => ""
+        case _ => ".min"
+    }
+) { isProd =>
+	<script type="text/javascript" src="@routes.Assets.at("javascripts/lib/jquery-1.9.0" + isProd + ".js")"></script>
+	<script type="text/javascript" src="@routes.Assets.at("javascripts/lib/lodash-1.0.0-RC3" + isProd + ".js")"></script>
+	<script type="text/javascript" src="@routes.Assets.at("javascripts/lib/underscore.string-2.3.0" + isProd + ".js")"></script>
+	<script type="text/javascript" src="@routes.Assets.at("javascripts/lib/moment-1.7.2" + isProd + ".js")"></script>
+
+	@*<script type="text/javascript" src="@routes.Assets.at("javascripts/lib/bootstrap-2.2.2" + isProd + ".js")"></script>*@
+	<script type="text/javascript" src="@routes.Assets.at("javascripts/lib/bootstrap-datepicker-20130124.js")"></script>
+	<script type="text/javascript" src="@routes.Assets.at("javascripts/lib/bootstrap-datepicker-20130124.fr.js")"></script>
+
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/lib/angular-1.1.1/angular" + isProd + ".js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/lib/angular-1.1.1/angular-resource" + isProd + ".js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/lib/angular-1.1.1/i18n/angular-locale_fr-fr.js")"></script>
+
+
+	@*
+	<script type="text/javascript" src="@routes.Assets.at("javascripts/lib/numeral-1.3.3" + isProd + ".js")"></script>
+	<script type="text/javascript" src="@routes.Assets.at("javascripts/lib/numeral.fr-1.3.3" + isProd + ".js")"></script>
+	*@
+
+    @if(play.Play.isDev){
+        <script type="text/javascript" src="@routes.Assets.at("javascripts/app/backoffice/app.js")"></script>
+        <script type="text/javascript" src="@routes.Assets.at("javascripts/app/backoffice/controllers/EmployeesController.js")"></script>
+        <script type="text/javascript" src="@routes.Assets.at("javascripts/app/backoffice/controllers/EmployeeController.js")"></script>
+        <script type="text/javascript" src="@routes.Assets.at("javascripts/app/backoffice/controllers/CustomersController.js")"></script>
+        <script type="text/javascript" src="@routes.Assets.at("javascripts/app/backoffice/controllers/CustomerController.js")"></script>
+        <script type="text/javascript" src="@routes.Assets.at("javascripts/app/backoffice/controllers/MissionController.js")"></script>
+        <script type="text/javascript" src="@routes.Assets.at("javascripts/app/backoffice/filters/capitalize.js")"></script>
+        <script type="text/javascript" src="@routes.Assets.at("javascripts/app/backoffice/directives/bDatepicker.js")"></script>
+        <script type="text/javascript" src="@routes.Assets.at("javascripts/app/backoffice/services/EmployeesResource.js")"></script>
+        <script type="text/javascript" src="@routes.Assets.at("javascripts/app/backoffice/services/CustomersResource.js")"></script>
+        <script type="text/javascript" src="@routes.Assets.at("javascripts/app/backoffice/services/MissionsResource.js")"></script>
+        <script type="text/javascript" src="@routes.Assets.at("javascripts/app/backoffice/services/RolesResource.js")"></script>
+    } else {
+		<script type="text/javascript" src="@routes.Assets.at("javascripts/backoffice.min.js")" ></script>
+    }
+}

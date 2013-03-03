@@ -1,0 +1,24 @@
+@(cra: models.Cra, customer: Option[models.Customer])
+@import export.cra.ExportDetailedTimes
+@import export.cra.ExportStandBy
+@import export.ExportTotal
+@import export.ExportSignature
+@import export.ExportFees
+@import export.ExportComment
+@import export.ExportCalendar
+@import export.ExportHeader
+
+
+@mainExport("Cra", cra, customer){
+    <div class="export cra">
+        @*ExportHeader(cra, customer)
+        @ExportCalendar(cra, customer, false)
+        @ExportTotal(cra, customer)
+        @ExportComment(cra, customer)
+        @ExportSignature(customer)
+	    @ExportStandBy(cra, customer)
+	    @ExportDetailedTimes(cra, customer)
+        @ExportFees(cra, customer)*@
+    </div>
+}
+

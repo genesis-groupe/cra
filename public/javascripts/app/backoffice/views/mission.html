@@ -1,0 +1,105 @@
+<div class="row-fluid">
+	<div class="span6">
+
+		<form class="well well-small form-horizontal" id="edit-mission-form" data-ng-submit="update()">
+			<div class="control-group">
+				<label class="control-label" for="mission_customerName">Customer</label>
+
+				<div class="controls">
+					<a ng-href="#/customer/{{mission.customerId}}" id="mission_customerName">{{mission.customerName}}</a>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="mission_code">Code <i class="icon-mandatory"></i></label>
+
+				<div class="controls">
+					<input type="text" class="span5" id="mission_code" required placeholder="code" data-ng-model="mission.code">
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="mission_label">Label <i class="icon-mandatory"></i></label>
+
+				<div class="controls">
+					<input type="text" class="span12" id="mission_label" required placeholder="label" data-ng-model="mission.label">
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="mission_missionType">Type <i class="icon-mandatory"></i></label>
+
+				<div class="controls">
+					<select data-ng-model="mission.missionType" id="mission_missionType" required>
+						<option value="">-- choose --</option>
+						<option value="CUSTOMER">CUSTOMER</option>
+						<option value="PRESALES">PRESALES</option>
+						<option value="INTERNAL_WORK">INTERNAL_WORK</option>
+						<option value="HOLIDAY">HOLIDAY</option>
+						<option value="UNPAID">UNPAID</option>
+					</select>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="mission_allowanceType">Allowance type <i class="icon-mandatory"></i></label>
+
+				<div class="controls">
+					<select data-ng-model="mission.allowanceType" id="mission_allowanceType" required>
+						<option value="">-- choose --</option>
+						<option value="NONE">NONE</option>
+						<option value="ZONE">ZONE</option>
+						<option value="REAL">REAL</option>
+						<option value="CASINO">CASINO</option>
+					</select>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="mission_distance">Distance</label>
+
+				<div class="controls">
+					<input type="text" class="span3" id="mission_distance" placeholder="1.5" data-ng-model="mission.distance">
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="mission_startDate">Begin <i class="icon-mandatory"></i></label>
+
+				<div class="controls">
+					<input type="text" class="span5" id="mission_startDate" b-datepicker data-ng-model="mission.startDate" required="required">
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="mission_endDate">End</label>
+
+				<div class="controls">
+					<input type="text" class="span5" id="mission_endDate" b-datepicker data-ng-model="mission.endDate">
+				</div>
+			</div>
+		</form>
+	</div>
+	<div class="span6">
+		<div class="row-fluid">
+			<div class="span12">
+				<form class="well well-small form-inline" data-ng-submit="addStandByMoment()">
+					<input type="number" class="span2" data-ng-model="sbm.index" required>
+					<input type="text" class="span8" data-ng-model="sbm.label" required>
+					<button type="submit" class="btn btn-primary"><i class="icon-plus"></i></button>
+				</form>
+			</div>
+		</div>
+		<div class="row-fluid">
+			<div class="span12 well well-small" style="height:350px; overflow-y:auto; overflow-x:hidden;">
+				<div class="row-fluid" data-ng-repeat="msbm in mission.standByMoments | orderBy:'+index'">
+					<div class="span12">
+						<input type="number" class="span2" data-ng-model="msbm.index" form="edit-mission-form" disabled>
+						<input type="text" class="span8" data-ng-model="msbm.label" form="edit-mission-form">
+						<button class="btn btn-danger" data-ng-click="removeStandByMoment(msbm.index)"><i class="icon-trash"></i></button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row-fluid">
+	<div class="span12">
+		<div class="form-actions">
+			<input type="submit" class="btn btn-primary span2 pull-right" value="Save" form="edit-mission-form">
+		</div>
+	</div>
+</div>

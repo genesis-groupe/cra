@@ -1,0 +1,11 @@
+@(id: String, label: String, span: java.lang.Integer, placeHolder: String = "", isRequired: Boolean = false)
+
+<div class="control-group">
+	<label class="control-label" for="@id">@label</label>
+	<div class="controls">
+		<input type="text" class="span@span" id="@id" name="@id" placeholder="@placeHolder" @if(isRequired){required}>
+		@if(isRequired){<i class="icon-mandatory"></i>}
+	</div>
+</div>
+
+@* A supprimer car pas utiliser *@

@@ -1,0 +1,12 @@
+01101100 01100101  01000011 01010010 01000001 00101100  11100111 01100001  01100011 01110010 01100001 01101001 01101110 01110100  00100001 
+
+Developp
+	Hands in the dirty oil
+With
+	Play framework 2.0
+	MongoDB
+	JQuery
+	Twitter bootstrap
+By
+	Lucas Pommateau <l.pommateau@genesis-groupe.com>
+	Frédéric Patin <f.patin@genesis-groupe.com>
